@@ -62,7 +62,9 @@ public class AreaDeTrabajoController implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource().equals(vista.compilador)) {
+        if (e.getSource().equals(vista.salir)) {
+            System.exit(0);
+        } else if (e.getSource().equals(vista.compilador)) {
             agregarCompilador();
         } else if (e.getSource().equals(vista.maquina)) {
             agregarMaquina();
@@ -73,17 +75,7 @@ public class AreaDeTrabajoController implements ActionListener {
         } else if (e.getSource().equals(vista.editar)) {
             Figura f = lienzoController.getFiguraEnPunto(lienzoController.init);
             lienzoController.editar(f);
-        }else if (e.getSource().equals(vista.duplicar)) {
-            Figura f = lienzoController.getFiguraEnPunto(lienzoController.init);
-            if(f!= null)
-            {
-                Figura f2 = f.duplicar();
-                agregarFigura(f2);
-                
-            }
-            
-        } 
-        else if (e.getSource().equals(vista.separar)) {
+        } else if (e.getSource().equals(vista.separar)) {
             Figura f = lienzoController.getFiguraEnPunto(lienzoController.init);
             f.separar();
             f.mover(-f.getTAM(), -f.getTAM(), false);
@@ -143,7 +135,7 @@ public class AreaDeTrabajoController implements ActionListener {
 
     public void mostrarAyuda() {
         try {
-            java.awt.Desktop.getDesktop().open(new File("./help.html"));
+            java.awt.Desktop.getDesktop().open(new File("./ayuda/help.html"));
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -181,7 +173,6 @@ public class AreaDeTrabajoController implements ActionListener {
             }
         }
     }
-    
 
     private void restaurar() {
         ObjectContainer db = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), dataBaseName);
